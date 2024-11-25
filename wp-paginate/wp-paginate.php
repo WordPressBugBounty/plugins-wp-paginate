@@ -3,7 +3,7 @@
 Plugin Name: WP-Paginate
 Plugin URI: https://wordpress.org/plugins/wp-paginate/
 Description: A simple and flexible pagination plugin for WordPress posts and comments.
-Version: 2.2.2
+Version: 2.2.3
 Author: Max Foundry
 Author URI: http://maxfoundry.com
 Text Domain: 'wp-paginate'
@@ -60,7 +60,7 @@ if (!class_exists('WPPaginate')) {
         /**
          * @var string The plugin version
          */
-        public $version = '2.2.2';
+        public $version = '2.2.3';
 
         /**
          * @var string The options string name for this plugin
@@ -101,9 +101,6 @@ if (!class_exists('WPPaginate')) {
             $name = dirname(plugin_basename(__FILE__));
 						$this->set_activation_hooks();
 						
-            //Language Setup
-            load_plugin_textdomain('wp-paginate', false, "$name/I18n/");
-
             //"Constants" setup
             $this->pluginurl = plugins_url($name) . "/";
             $this->pluginpath = WP_PLUGIN_DIR . "/$name/";
@@ -116,7 +113,10 @@ if (!class_exists('WPPaginate')) {
             add_action('admin_menu', array(&$this, 'admin_menu_link'));
             add_action('admin_enqueue_scripts', array($this, 'wpp_admin_head'));
 						add_action('wp_enqueue_scripts', array($this, 'wpp_enqueue_custom_css'), 20);
-						
+            
+            //Language Setup
+            //load_plugin_textdomain('wp-paginate', false, "$name/I18n/");
+            add_action('plugins_loaded', array($this, 'pagination_load_textdomain'));						
 						
             add_action('admin_notices', array($this, 'show_wpp_admin_notice'));
 						
@@ -153,6 +153,11 @@ if (!class_exists('WPPaginate')) {
 												
             if ($this->options['css'])
                 add_action('wp_print_styles', array(&$this, 'wp_paginate_css'));
+        }
+        
+        function pagination_load_textdomain() {
+          $name = dirname(plugin_basename(__FILE__));
+          load_plugin_textdomain('wp-paginate', false, "$name/I18n/");
         }
 				
 					public function set_activation_hooks() {
