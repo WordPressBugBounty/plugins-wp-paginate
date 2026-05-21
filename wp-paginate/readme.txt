@@ -1,9 +1,10 @@
 === WP-Paginate ===
 Contributors: maxfoundry, emartin24, AlanP57
-Tags: paginate, pagination, navigation, page, wp-paginate, comments, rtl, seo, usability
+Tags: paginate, pagination, navigation, page, wp-paginate
 Requires at least: 2.6.0 (2.7.0 for comments pagination)
-Tested up to: 6.7.2
-Stable tag: 2.2.4
+Requires at least: 3.0
+Tested up to: 7.0
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +162,12 @@ Example (also applies to `wp_paginate_comments()`):
 When calling `wp_paginate_comments()`, WP-Paginate adds an extra class to the `ol` element, `wp-paginate-comments`.
 
 == Changelog ==
+= 2.2.6 =
+* Tested with Wordpress 7.0
+
+= 2.2.5 =
+* Tested with Wordpress 6.9
+
 = 2.2.4 =
 * Added class 'ellipse-gap' to the pagination HTML
 
